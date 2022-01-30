@@ -124,7 +124,28 @@ int main(void) {
 
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
-	
+	while (1) {
+		/* USER CODE END WHILE */
+
+		/* USER CODE BEGIN 3 */
+		getPotentiometerValue();
+		getThreshold();
+		char asd[4];
+		snprintf(asd, sizeof(asd), "%d", threshold);
+//		ssd1306_Fill(Black);
+//		ssd1306_SetCursor(2, 28);
+//		ssd1306_WriteString(asd, Font_16x26, White);
+//		ssd1306_UpdateScreen();
+
+		ssd1306_Fill(Black);
+		ssd1306_SetCursor(2, 0);
+		ssd1306_WriteString("Value:", Font_16x26, White);
+		ssd1306_SetCursor(2, 28);
+		ssd1306_WriteString(asd, Font_16x26, White);
+		ssd1306_UpdateScreen();
+
+		checkBtnPressed();
+	}
 	/* USER CODE END 3 */
 }
 
@@ -318,6 +339,203 @@ static void MX_GPIO_Init(void) {
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
 	HAL_GPIO_Init(Relay_OUT_GPIO_Port, &GPIO_InitStruct);
 
+}
+
+/* USER CODE BEGIN 4 */
+void checkBtnPressed(void) {
+
+	if (HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin) == 0) {
+		if (btnPressed == 0) {
+			btnPressed = 1;
+			//printf("Premuto!\n");
+			HAL_GPIO_WritePin(Relay_OUT_GPIO_Port, Relay_OUT_Pin,
+					GPIO_PIN_RESET);
+			HAL_Delay(threshold);
+			HAL_GPIO_WritePin(Relay_OUT_GPIO_Port, Relay_OUT_Pin, GPIO_PIN_SET);
+		}
+	}
+	btnPressed = 0;
+}
+
+void getPotentiometerValue(void) {
+	HAL_ADC_Start(&hadc1);
+	adcValue = HAL_ADC_GetValue(&hadc1);
+
+	myTimerValue = round(adcValue / 10);
+	//printf("Timer Value: %d\n", myTimerValue);
+}
+
+void getThreshold(void) {
+
+	if (myTimerValue <= 5) {
+		threshold = 5;
+	} else if (myTimerValue <= 10) {
+		threshold = 10;
+	} else if (myTimerValue <= 15) {
+		threshold = 15;
+	} else if (myTimerValue <= 20) {
+		threshold = 20;
+	} else if (myTimerValue <= 25) {
+		threshold = 25;
+	} else if (myTimerValue <= 30) {
+		threshold = 30;
+	} else if (myTimerValue <= 35) {
+		threshold = 35;
+	} else if (myTimerValue <= 40) {
+		threshold = 40;
+	} else if (myTimerValue <= 45) {
+		threshold = 45;
+	} else if (myTimerValue <= 50) {
+		threshold = 50;
+	} else if (myTimerValue <= 55) {
+		threshold = 55;
+	} else if (myTimerValue <= 60) {
+		threshold = 60;
+	} else if (myTimerValue <= 65) {
+		threshold = 65;
+	} else if (myTimerValue <= 70) {
+		threshold = 70;
+	} else if (myTimerValue <= 75) {
+		threshold = 75;
+	} else if (myTimerValue <= 80) {
+		threshold = 80;
+	} else if (myTimerValue <= 85) {
+		threshold = 85;
+	} else if (myTimerValue <= 90) {
+		threshold = 90;
+	} else if (myTimerValue <= 95) {
+		threshold = 95;
+	} else if (myTimerValue <= 100) {
+		threshold = 100;
+	} else if (myTimerValue <= 105) {
+		threshold = 105;
+	} else if (myTimerValue <= 110) {
+		threshold = 110;
+	} else if (myTimerValue <= 115) {
+		threshold = 115;
+	} else if (myTimerValue <= 120) {
+		threshold = 120;
+	} else if (myTimerValue <= 125) {
+		threshold = 125;
+	} else if (myTimerValue <= 130) {
+		threshold = 130;
+	} else if (myTimerValue <= 135) {
+		threshold = 135;
+	} else if (myTimerValue <= 140) {
+		threshold = 140;
+	} else if (myTimerValue <= 145) {
+		threshold = 145;
+	} else if (myTimerValue <= 150) {
+		threshold = 150;
+	} else if (myTimerValue <= 155) {
+		threshold = 155;
+	} else if (myTimerValue <= 160) {
+		threshold = 160;
+	} else if (myTimerValue <= 165) {
+		threshold = 165;
+	} else if (myTimerValue <= 170) {
+		threshold = 170;
+	} else if (myTimerValue <= 175) {
+		threshold = 175;
+	} else if (myTimerValue <= 180) {
+		threshold = 180;
+	} else if (myTimerValue <= 185) {
+		threshold = 185;
+	} else if (myTimerValue <= 190) {
+		threshold = 190;
+	} else if (myTimerValue <= 195) {
+		threshold = 195;
+	} else if (myTimerValue <= 200) {
+		threshold = 200;
+	} else if (myTimerValue <= 205) {
+		threshold = 205;
+	} else if (myTimerValue <= 210) {
+		threshold = 210;
+	} else if (myTimerValue <= 215) {
+		threshold = 215;
+	} else if (myTimerValue <= 220) {
+		threshold = 220;
+	} else if (myTimerValue <= 225) {
+		threshold = 225;
+	} else if (myTimerValue <= 230) {
+		threshold = 230;
+	} else if (myTimerValue <= 235) {
+		threshold = 235;
+	} else if (myTimerValue <= 240) {
+		threshold = 240;
+	} else if (myTimerValue <= 245) {
+		threshold = 245;
+	} else if (myTimerValue <= 250) {
+		threshold = 250;
+	} else if (myTimerValue <= 255) {
+		threshold = 255;
+	} else if (myTimerValue <= 260) {
+		threshold = 260;
+	} else if (myTimerValue <= 265) {
+		threshold = 265;
+	} else if (myTimerValue <= 270) {
+		threshold = 270;
+	} else if (myTimerValue <= 275) {
+		threshold = 275;
+	} else if (myTimerValue <= 280) {
+		threshold = 280;
+	} else if (myTimerValue <= 285) {
+		threshold = 285;
+	} else if (myTimerValue <= 290) {
+		threshold = 290;
+	} else if (myTimerValue <= 295) {
+		threshold = 295;
+	} else if (myTimerValue <= 300) {
+		threshold = 300;
+	} else if (myTimerValue <= 305) {
+		threshold = 305;
+	} else if (myTimerValue <= 310) {
+		threshold = 310;
+	} else if (myTimerValue <= 315) {
+		threshold = 315;
+	} else if (myTimerValue <= 320) {
+		threshold = 320;
+	} else if (myTimerValue <= 325) {
+		threshold = 325;
+	} else if (myTimerValue <= 330) {
+		threshold = 330;
+	} else if (myTimerValue <= 335) {
+		threshold = 335;
+	} else if (myTimerValue <= 340) {
+		threshold = 340;
+	} else if (myTimerValue <= 345) {
+		threshold = 345;
+	} else if (myTimerValue <= 350) {
+		threshold = 350;
+	} else if (myTimerValue <= 355) {
+		threshold = 355;
+	} else if (myTimerValue <= 360) {
+		threshold = 360;
+	} else if (myTimerValue <= 365) {
+		threshold = 365;
+	} else if (myTimerValue <= 370) {
+		threshold = 370;
+	} else if (myTimerValue <= 375) {
+		threshold = 375;
+	} else if (myTimerValue <= 380) {
+		threshold = 380;
+	} else if (myTimerValue <= 385) {
+		threshold = 385;
+	} else if (myTimerValue <= 390) {
+		threshold = 390;
+	} else if (myTimerValue <= 395) {
+		threshold = 395;
+	} else if (myTimerValue <= 400) {
+		threshold = 400;
+	} else if (myTimerValue <= 405) {
+		threshold = 405;
+	} else if (myTimerValue <= 410) {
+		threshold = 410;
+	} else if (myTimerValue <= 415) {
+		threshold = 415;
+	}
+
+	//printf("threshold: %d\n", threshold);
 }
 
 void I2C_Scan() {
